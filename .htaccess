@@ -1,0 +1,21 @@
+# منع فهرسة الملفات
+Options -Indexes
+
+# تفعيل MultiViews
+Options +MultiViews
+
+# تفعيل محرك إعادة الكتابة
+RewriteEngine On
+
+# إزالة الشرطة المائلة / من نهاية الرابط
+RewriteCond %{REQUEST_URI} /$ [NC]
+RewriteRule ^(.*)/$ /$1 [R=301,L]
+
+# التحقق من أن الملف غير موجود كملف فعلي
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# إعادة كتابة الروابط بدون الامتداد .php
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# إضافة نوع محتوى XML
+AddType application/xml .xml
